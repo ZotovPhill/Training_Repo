@@ -10,18 +10,28 @@ class Person:
         return subname
 
     def rise_pay(self, persent):
-        uptime = float(self.pay + (self.pay * (persent / 100)))
-        return uptime
+        self.pay = float(self.pay + (self.pay * (persent / 100)))
 
     def __str__(self):
-        s = "Person: {name}, {age} is now working as {job} with {pay} $/per hour".format(
+        s = "Person: {name}, {age} is now working as {job} with {pay:.2f} $/per hour".format(
             name=self.name, age=self.age, job=self.job, pay=self.pay
         )
         return s
 
 
+class Manager(Person):
+    def rise_pay(self, percent, bonus=10):
+        Person.rise_pay(self, percent + bonus)
+
+
 if __name__ == "__main__":
     bob = Person("Bob Ross", age=18, job="Freelancer", pay=17)
-    print(bob)  # Overload of __str__ method
-    print("{0}, {1}".format(bob.name, bob.pay))
-    print("{0}, {1:.2f}".format(bob.get_subname(), bob.rise_pay(10)))
+    # Overload of __str__ method
+
+    pat = Manager(
+        "Jeremi Rhiner", age=28, job="Hard Worker at Chemical Factory", pay=40
+    )
+
+    for person in (bob, pat):
+        person.rise_pay(10)
+        print(person)
