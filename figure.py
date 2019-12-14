@@ -16,7 +16,7 @@ while rows != 0:
         space -= 6
         stick += 2
     elif rows == middle_space:
-        print(draw_line(new_space, welcome=True))
+        print(draw_line(new_space - 4, welcome=True))
     else:
         space += 6
         stick -= 2
